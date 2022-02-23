@@ -6,81 +6,57 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FilmManagerTest {
 
+    FilmItems items = new FilmItems();
+    FilmManager manager = new FilmManager(items);
+
+
+    FilmItems film1 = new FilmItems(11, "film1");
+    FilmItems film2 = new FilmItems(22, "film2");
+    FilmItems film3 = new FilmItems(33, "film3");
+    FilmItems film4 = new FilmItems(44, "film4");
+    FilmItems film5 = new FilmItems(55, "film5");
+    FilmItems film6 = new FilmItems(66, "film6");
+    FilmItems film7 = new FilmItems(77, "film7");
+    FilmItems film8 = new FilmItems(88, "film8");
+    FilmItems film9 = new FilmItems(99, "film9");
+    FilmItems film10 = new FilmItems(10, "film10");
+
+
     @Test
     public void add() {
-        FilmManager repo = new FilmManager();
 
-        FilmManager[] item = new FilmManager[3];
-
-        item[0] = new FilmManager("first", 100);
-        item[1] = new FilmManager("first", 11);
-        item[2] = new FilmManager("second", 22);
+        manager.save(film1);
 
 
-        repo.save(item[0]);
-        repo.save(item[1]);
-        repo.save(item[2]);
-
-        repo.add(item[3]);
-
-        FilmManager[] expected = {item[0], item[1], item[2], item[3]};
-        FilmManager[] actual = repo.findAll();
+        FilmItems[] expected = {film1};
+        FilmItems[] actual = manager.findAll();
 
         assertArrayEquals(expected, actual);
-
     }
 
 
     @Test
-    void getAll() {
-        FilmManager repo = new FilmManager();
+    public void getAll() {
+        manager.save(film1);
+        manager.save(film2);
+        manager.save(film3);
+        manager.save(film4);
+        manager.save(film5);
+        manager.save(film6);
+        manager.save(film7);
+        manager.save(film8);
+        manager.save(film9);
+        manager.save(film10);
 
-        FilmManager[] item = new FilmManager[3];
+        manager.getAll();
 
-        item[0] = new FilmManager("first", 100);
-        item[1] = new FilmManager("first", 11);
-        item[2] = new FilmManager("second", 22);
-
-
-        repo.save(item[0]);
-        repo.save(item[1]);
-        repo.save(item[2]);
-
-        repo.getAll();
-
-        FilmManager[] expected = {item[2], item[1], item[0]};
-        FilmManager[] actual = repo.findAll();
+        FilmItems[] expected = {film1, film2, film3, film4, film5, film6, film7, film8, film9, film10};
+        FilmItems[] actual = manager.findAll();
 
         assertArrayEquals(expected, actual);
-
-    }
-
-    @Test
-    void getAllLast() {
-        FilmManager repo = new FilmManager();
-
-        FilmManager[] item = new FilmManager[3];
-
-        item[0] = new FilmManager("first", 100);
-        item[1] = new FilmManager("first", 11);
-        item[2] = new FilmManager("second", 22);
-
-
-        repo.save(item[0]);
-        repo.save(item[1]);
-        repo.save(item[2]);
-
-        repo.getAll();
-
-        FilmManager[] expected = {item[0], item[1], item[2]};
-        FilmManager[] actual = repo.findAll();
-
-        assertArrayEquals(expected, actual);
-
     }
 
 
 
 }
-
 
