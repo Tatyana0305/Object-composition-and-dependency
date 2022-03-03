@@ -21,10 +21,6 @@ public class FilmManager {
     }
 
 
-    public FilmItems[] findAll() {
-        return items;
-    }
-
     public void save(FilmItems item) {
 
         int length = items.length + 1;
@@ -58,28 +54,18 @@ public class FilmManager {
         return result;
     }
 
-    public FilmItems[] getAllFromEnd() {
-        findAll();
-        FilmItems[] result;
-        int resultLength;
-        if (items.length > maxLength) {
-            resultLength = maxLength;
-            result = new FilmItems[resultLength];
-            for (int i = maxLength; i > resultLength; i--) {
-                int index = resultLength + i;
-                result[i] = items[index];
-
-            }
-        } else {
-            result = new FilmItems[items.length];
-            for (int i = maxLength; i > items.length; i--) {
-                int index = items.length - i + 1;
-                result[i] = items[index];
-
-            }
-        }
-        return result;
+    public FilmItems[] findAll() {
+        return items;
     }
 
 
+    public FilmItems[] findLast() {
+        int resultLength = Math.min(maxLength, items.length);
+        FilmItems[] tmp = new FilmItems[resultLength];
+        for (int i = 0; i < tmp.length; i++) {
+            tmp[i] = items[items.length - 1 - i];
+        }
+        return tmp;
+    }
 }
+
