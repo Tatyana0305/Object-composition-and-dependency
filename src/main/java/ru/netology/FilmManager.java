@@ -1,19 +1,29 @@
 package ru.netology;
 
 public class FilmManager {
+    private final int maxLength;
     private FilmItems[] items = new FilmItems[0];
-    private int maxLength = 10;
 
 
     public FilmManager(FilmItems items) {
-
+        this.maxLength = 10;
     }
 
-    public FilmManager(FilmItems[] items, int maxLength) {
-        this.items = items;
+    public FilmManager(int maxLength) {
         this.maxLength = maxLength;
     }
 
+    public void add(FilmItems newItem) {
+        FilmItems[] tmp = new FilmItems[items.length + 1];
+        System.arraycopy(items, 0, tmp, 0, items.length);
+        tmp[tmp.length - 1] = newItem;
+        this.items = tmp;
+    }
+
+
+    public FilmItems[] findAll() {
+        return items;
+    }
 
     public void save(FilmItems item) {
 
@@ -25,10 +35,6 @@ public class FilmManager {
         items = tmp;
     }
 
-    public void add(FilmItems item) {
-        FilmManager manager = new FilmManager(item);
-        manager.save(item);
-    }
 
     public FilmItems[] getAll() {
 
@@ -76,7 +82,4 @@ public class FilmManager {
     }
 
 
-    public FilmItems[] findAll() {
-        return items;
-    }
 }
