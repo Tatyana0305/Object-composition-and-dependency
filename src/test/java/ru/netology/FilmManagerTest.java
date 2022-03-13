@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class FilmManagerTest {
 
     private FilmManager manager = new FilmManager(10);
-    private FilmItems items = new FilmItems();
 
     FilmItems film1 = new FilmItems(11, "film1", 2000);
     FilmItems film2 = new FilmItems(22, "film2", 2001);
@@ -79,6 +78,7 @@ class FilmManagerTest {
 
     @Test
     public void shouldFindLast() {
+
         manager.save(film1);
         manager.save(film2);
         manager.save(film3);
@@ -106,6 +106,19 @@ class FilmManagerTest {
         manager.save(film4);
 
         FilmItems[] expected = {film4, film3, film2};
+        FilmItems[] actual = manager.findLast();
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void ShouldFindLastOtherLength2() {
+
+        manager.save(film1);
+        manager.save(film2);
+
+
+        FilmItems[] expected = {film2, film1};
         FilmItems[] actual = manager.findLast();
 
         assertArrayEquals(expected, actual);

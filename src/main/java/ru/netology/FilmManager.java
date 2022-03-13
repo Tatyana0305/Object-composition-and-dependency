@@ -5,10 +5,6 @@ public class FilmManager {
     private FilmItems[] items = new FilmItems[0];
 
 
-    public FilmManager(FilmItems items) {
-        this.maxLength = 10;
-    }
-
     public FilmManager(int maxLength) {
         this.maxLength = maxLength;
     }
@@ -35,21 +31,13 @@ public class FilmManager {
     public FilmItems[] getAll() {
 
         FilmItems[] result;
-        int resultLength;
-        if (items.length > maxLength) {
-            resultLength = maxLength;
-            result = new FilmItems[resultLength];
-            for (int i = 0; i < resultLength; i++) {
-                int index = resultLength - i;
-                result[i] = items[index];
-            }
-        } else {
-            result = new FilmItems[items.length];
-            for (int i = 0; i < items.length; i++) {
-                int index = items.length - i - 1;
-                result[i] = items[index];
 
-            }
+        result = new FilmItems[items.length];
+
+        for (int i = 0; i < items.length; i++) {
+            int index = items.length - i - 1;
+            result[i] = items[index];
+
         }
         return result;
     }
@@ -60,12 +48,23 @@ public class FilmManager {
 
 
     public FilmItems[] findLast() {
-        int resultLength = Math.min(maxLength, items.length);
-        FilmItems[] tmp = new FilmItems[resultLength];
-        for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = items[items.length - 1 - i];
+
+        int resultLength;
+
+        if (items.length >= maxLength) {
+            resultLength = maxLength;
+            FilmItems[] tmp = new FilmItems[resultLength];
+            for (int i = 0; i < maxLength; i++) {
+                tmp[i] = items[items.length - 1 - i];
+            }
+            return tmp;
+        } else {
+            FilmItems[] tmp = new FilmItems[items.length];
+            for (int i = 0; i < items.length; i++) {
+                tmp[i] = items[items.length - 1 - i];
+            }
+            return tmp;
         }
-        return tmp;
     }
 }
 
